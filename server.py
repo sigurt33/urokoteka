@@ -282,12 +282,13 @@ PAGE_HTML = """<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Записи уроков</title>
+<title>УрокоТека</title>
 <style>
   * { box-sizing: border-box; }
   body { font-family: system-ui, Segoe UI, Arial, sans-serif; margin: 0; background:#f5f6f8; color:#1c1d22; }
   header { background:#fff; border-bottom:1px solid #e3e5ea; padding:16px 20px; position:relative; }
-  h1 { font-size:18px; margin:0 0 12px; }
+  h1 { font-size:22px; margin:0 0 12px; }
+  h1 .sub { font-size:14px; font-weight:400; color:#6b7280; }
   .logos { position:absolute; top:14px; right:20px; display:flex; align-items:center; gap:22px; perspective:900px; }
   .coin { position:relative; display:inline-block; transform-style:preserve-3d; animation: coin 6s linear infinite; }
   .coin .face { height:68px; width:auto; display:block; backface-visibility:hidden; }
@@ -333,7 +334,7 @@ PAGE_HTML = """<!doctype html>
       <img class="face back"  src="/logos/ktalk.png" alt="">
     </span>
   </div>
-  <h1>Записи уроков за последние 3 дня</h1>
+  <h1>УрокоТека <span class="sub">— записи уроков за последние 3 дня</span></h1>
   <div class="search">
     <input id="q" type="text" placeholder="Имя записи или преподаватель (пусто — все)" autofocus>
     <button id="go">Найти</button>
