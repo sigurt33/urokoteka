@@ -12,3 +12,9 @@ out*.json
 # Переносимые сборки (содержат config.py с ключом) — не публиковать
 *.zip
 portable/
+
+# Сборка .exe (PyInstaller) — содержит ключ, не публиковать
+dist/
+build/
+*.spec
+*.exe

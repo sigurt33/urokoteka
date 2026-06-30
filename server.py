@@ -12,6 +12,9 @@
 
 import json
 import os
+import sys
+import threading
+import webbrowser
 import urllib.parse
 import urllib.request
 import urllib.error
@@ -52,6 +55,13 @@ MAX_PAGES = 50         # предохранитель от бесконечно�
 # ---------------------------------------------------------------------------
 # Работа с API Толка
 # ---------------------------------------------------------------------------
+
+def resource_dir():
+    """Папка с ресурсами: внутри .exe (PyInstaller) — _MEIPASS, иначе — папка скрипта."""
+    if getattr(sys, "frozen", False):
+        return sys._MEIPASS
+    return os.path.dirname(os.path.abspath(__file__))
+
 
 def api_get(path, params=None):
     """GET к API Толка с заголовком-ключом. Возвращает разобранный JSON."""
@@ -242,7 +252,7 @@ class Handler(BaseHTTPRequestHandler):
     def handle_logo(self, route):
         """Отдаёт файлы логотипов из папки logos рядом со скриптом."""
         name = os.path.basename(route)  # защита от выхода из папки
-        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logos", name)
+        path = os.path.join(resource_dir(), "logos", name)
         if not os.path.isfile(path):
             self.send_error(404, "Logo not found")
             return
@@ -441,8 +451,11 @@ run();
 
 def main():
     server = ThreadingHTTPServer((HOST, PORT), Handler)
-    print(f"Сервер запущен. Откройте http://{HOST}:{PORT}")
-    print("Остановить: Ctrl+C")
+    url = f"http://{HOST}:{PORT}"
+    print(f"Сервер запущен. Откройте {url}")
+    print("Остановить: Ctrl+C (или закройте это окно)")
+    # Автоматически открываем браузер (удобно для .exe).
+    threading.Timer(1.0, lambda: webbrowser.open(url)).start()
     try:
         server.serve_forever()
     except KeyboardInterrupt:
