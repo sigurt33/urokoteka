@@ -21,3 +21,6 @@ build/
 *.exe
 context-local/
 scr/
+
+# Модуль автоматизации CRM — только локально
+crm_*
