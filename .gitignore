@@ -19,3 +19,5 @@ dist/
 build/
 *.spec
 *.exe
+context-local/
+scr/
